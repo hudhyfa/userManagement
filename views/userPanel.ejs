@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Panel</title>
+</head>
+<body>
+    <h1>hello <%= welcomeUser %></h1>
+    <form action="/signOut">
+        <button type="submit">sign out</button>
+    </form>
+    <script>
+        // Use JavaScript to navigate away from the user panel
+        function navigateAwayFromUserPanel() {
+            history.pushState(null, null, '/navigateAwayFromUserPanel');
+            window.location.href = '/';
+        }
+        // Attach the function to the onpopstate event to handle back button clicks
+        window.onpopstate = function (event) {
+        // Ensure users are redirected to the root page
+        window.location.href = '/';
+        };
+    </script>
+</body>
+</html>
