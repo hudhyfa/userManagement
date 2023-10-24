@@ -3,47 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello <%= name %></h1>
-    <form action="/admin/logout" >
-        <button type="submit">sign out</button>
-    </form>
-    <form action="/admin/adminPanel/:adminName" method="post">
-        <label for="">enter Username</label>
-        <input type="text" placeholder="enter" name="filterUser">
-        <button type="submit">search</button>
-    </form>
-    <table style="border: 1px solid black">
-        <tr>
-            <th>Username</th>
-            <th>update</th>
-            <th>delete</th>
-        </tr>
-        <% allUsers.forEach((user)=>{ %>
-        <tr>
-            <td><%= user.username %></td>
-            <td>
-                <form action="/admin/updateUser">
-                    <input type="hidden" name="username" value="<%= user.username %>">
-                    <button type="submit">update</button>
-                </form>
-            </td>
-            <td>
-                <form action="/admin/removeUser" method="post">
-                    <input type="hidden" name="username" value="<%= user.username %>">
-                    <button type="submit">delete</button>
-                </form>
-            </td>
-        </tr>
-        <% }) %>
-    </table>
-    <style>
-        table,th,td{
-            border: 1px solid black;
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" style="color: blue;">Pro Banks</a>
+          <form class="d-flex" action="/admin/adminPanel/:adminName" method="post">
+            <input class="form-control me-2" type="text" placeholder="enter username" name="filterUser">
+            <button class="btn btn-outline-primary" type="submit">search</button>
+        </form>
+        </div>
+    </nav>
+    <div class="row my-5">
+        <div class="col-3"></div>
+        <div class="col">
+            <table class="table table-bordered rounded-3">
+              <thead>
+                <tr class="bg-primary text-light">
+                  <th scope="col">username</th>
+                  <th scope="col">update</th>
+                  <th scope="col">delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% allUsers.forEach((user)=>{ %>
+                    <tr>
+                        <td><%= user.username %></td>
+                        <td>
+                            <form action="/admin/updateUser">
+                                <input type="hidden" name="username" value="<%= user.username %>">
+                                <button class="btn btn-outline-primary" type="submit">update</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/admin/removeUser" method="post">
+                                <input type="hidden" name="username" value="<%= user.username %>">
+                                <button class="btn btn-outline-primary" type="submit">delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+              </tbody>
+            </table>
+        </div>
+        <div class="col-3"></div>
+      </div>
+    <header>
+
+        <!-- This div is  intentionally blank. It creates the transparent black overlay over the video which you can modify in the CSS -->
+        <div class="overlay"></div>
+      
+        <!-- The HTML5 video element that will create the background video on the header -->
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+          <source src="../media/pexels-gabby-k-5849610 (1080p).mp4" type="video/mp4">
+        </video>
+      
+        <!-- The header content -->
+        <div class="container h-100">
+          <div class="d-flex h-100 text-center align-items-center">
+            <div class="w-100 text-white">
+              <!-- <h1 class="display-3">Video Header</h1> -->
+              <h1 class="display-3">hey there <%= name %></h1>
+              <p class="lead mb-0">just press the button below to log out.</p>
+              <form action="/admin/logOut" class="container-fluid justify-content-start">
+                <button class="btn btn-outline-primary mx-3 my-3 me-2" type="submit">Log out</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </header>
+      <style>
+        header {
+        position: relative;
+        background-color: black;
+        height: 75vh;
+        min-height: 25rem;
+        width: 100%;
+        overflow: hidden;
         }
-    </style>
+
+        header video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: 0;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        }
+
+        header .container {
+        position: relative;
+        z-index: 2;
+        }
+
+        header .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        /* background-color: black; */
+        opacity: 0.5;
+        z-index: 1;
+        }
+
+        /* Media Query for devices withi coarse pointers and no hover functionality */
+
+        /* This will use a fallback image instead of a video for devices that commonly do not support the HTML5 video element */
+
+        @media (pointer: coarse) and (hover: none) {
+        header {
+            background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+        }
+
+        header video {
+            display: none;
+        }
+        }
+      </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
     <script>
         // Use JavaScript to navigate away from the user panel
         function navigateAwayFromUserPanel() {

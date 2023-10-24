@@ -3,13 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>User Panel</title>
 </head>
 <body>
-    <h1>hello <%= welcomeUser %></h1>
-    <form action="/signOut">
-        <button type="submit">sign out</button>
-    </form>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <i class="fa-solid fa-bank"></i>
+              Bank App
+            </a>
+        </div>
+    </nav>
+    <header>
+
+        <!-- This div is  intentionally blank. It creates the transparent black overlay over the video which you can modify in the CSS -->
+        <div class="overlay"></div>
+      
+        <!-- The HTML5 video element that will create the background video on the header -->
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+          <source src="../media/pexels-gabby-k-5849610 (1080p).mp4" type="video/mp4">
+        </video>
+      
+        <!-- The header content -->
+        <div class="container h-100">
+          <div class="d-flex h-100 text-center align-items-center">
+            <div class="w-100 text-white">
+              <!-- <h1 class="display-3">Video Header</h1> -->
+              <h1 class="display-3">Welcome <%= welcomeUser %></h1>
+              <p class="lead mb-0">just press the button below to log out.</p>
+              <form action="/signOut" class="container-fluid justify-content-start">
+                <button class="btn btn-outline-primary mx-3 my-3 me-2" type="submit">Log out</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Page section example for content below the video header -->
+      <section class="my-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 mx-auto">
+              <p> At Probanks, we offer secure and innovative banking solutions to help you reach your financial goals.</p>
+              <p>Our experts provide personalized banking solutions to make your financial journey easier, from loans to online banking.</p>
+              <p>Join Probanks to be part of a community-focused bank that values your success and gives back to local neighborhoods.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <style>
+        header {
+        position: relative;
+        background-color: black;
+        height: 75vh;
+        min-height: 25rem;
+        width: 100%;
+        overflow: hidden;
+        }
+
+        header video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: 0;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+        }
+
+        header .container {
+        position: relative;
+        z-index: 2;
+        }
+
+        header .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        /* background-color: black; */
+        opacity: 0.5;
+        z-index: 1;
+        }
+
+        /* Media Query for devices withi coarse pointers and no hover functionality */
+
+        /* This will use a fallback image instead of a video for devices that commonly do not support the HTML5 video element */
+
+        @media (pointer: coarse) and (hover: none) {
+        header {
+            background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+        }
+
+        header video {
+            display: none;
+        }
+        }
+      </style>
+
     <script>
         // Use JavaScript to navigate away from the user panel
         function navigateAwayFromUserPanel() {
@@ -22,5 +120,6 @@
         window.location.href = '/';
         };
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
