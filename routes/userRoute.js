@@ -34,6 +34,8 @@ route.get('/signOut',user.checkoutUser);
 route.get('/',(req,res)=>{
     if(req.session.authenticated){
         res.redirect(`userPanel/${req.session.username}`)
+    }else if(req.session.auth){
+        res.redirect(`/admin/adminPanel/${req.session.adminName}`)
     }else{
         const errUsername = req.query.errUsername
         const errPassword = req.query.errPassword
@@ -45,8 +47,12 @@ route.get('/',(req,res)=>{
 route.post('/',user.checkInUser)
 
 route.get('/signup',(req,res)=>{
-    const message = req.query.message;
-    res.render('signup.ejs',{message})
+    if(req.session.authenticated){
+        res.redirect(`userPanel/${req.session.username}`)
+    }else{
+        const message = req.query.message;
+        res.render('signup.ejs',{message})
+    }
 })
 
 route.post('/signup',user.addUser)
